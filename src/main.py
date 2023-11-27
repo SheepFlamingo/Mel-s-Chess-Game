@@ -11,13 +11,14 @@ class Main:
         pygame.display.set_caption('Chess')
         self.game = Game()
     
-    def mainLoop(self):
+    def main_loop(self):
         
         game = self.game
         screen = self.screen
         
         while True:
             game.show_background(screen) # Creates a new window to display the board
+            game.show_pieces(screen)
             
             for event in pygame.event.get():
                 """Running through all of the events to check if the user is attempting to quit the application.""" ,
@@ -36,4 +37,4 @@ class Main:
 
 """ Create an instance of Main, then run the main loop. """
 main = Main()
-main.mainLoop()
+main.main_loop()

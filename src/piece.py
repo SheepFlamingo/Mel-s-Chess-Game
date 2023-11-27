@@ -1,3 +1,4 @@
+import os
 
 class Piece:
     
@@ -15,9 +16,24 @@ class Piece:
         self.color = color
         value_sign = 1 if color == 'white' else -1 # White pieces will have positive values and black pieces will have negative values which will help the AI differentiate between the two.
         self.value = value * value_sign
+        self.moves = [] # The valid moves of a piece
+        self.moved = False
         self.texture = texture
         self.set_texture()
         self.texture_rect = texture_rect
+    
+    def set_texture(self, size=80):
+        """path to the assests folder for the texture of the piece
+
+        Args:
+            size (int, optional): There is a case for both 128px and 80px. Defaults to 80px.
+        """
+        self.texture = os.path.join(
+            f'assets/images/imgs-{size}px/{self.color}_{self.name}.png'
+        )
+    
+    def add_moves(self, move):
+        self.moves.append(move)
     
 class Pawn(Piece):
     def __init__(self, color):
