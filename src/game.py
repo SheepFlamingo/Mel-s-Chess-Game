@@ -1,11 +1,13 @@
 import pygame
 from const import *
 from board import Board
+from dragger import Dragger
 
 class Game:
     """Responsible for all the rendering methods aka show methods"""
     def __init__(self):
         self.board = Board()
+        self.dragger = Dragger()
     
     def show_background(self, surface):
         """Draw the pattern of the chess board, which follows one dark pattern, then one light pattern.
@@ -31,7 +33,10 @@ class Game:
                 if self.board.squares[row][col].has_piece():
                     piece = self.board.squares[row][col].piece # Saving that piece onto a variable
                     
-                    img = pygame.image.load(piece.texture) # Converts texture into an actual image to be displayed
-                    img_center = col * squareSize + squareSize // 2, row * squareSize + squareSize // 2 # Creating an image center to center the piece on the square
-                    piece.texture_rect = img.get_rect(center=img_center) # Telling texture_rect the image created to be centered on the square in the display
-                    surface.blit(img, piece.texture_rect) # Telling pygame to blit my image into the texture rect which is already centered
+                    # all pieces except dragger pieces
+                    if piece is not self.dragger.piece:
+                        piece.set_texture(size=80)
+                        img = pygame.image.load(piece.texture) # Converts texture into an actual image to be displayed
+                        img_center = col * squareSize + squareSize // 2, row * squareSize + squareSize // 2 # Creating an image center to center the piece on the square
+                        piece.texture_rect = img.get_rect(center=img_center) # Telling texture_rect the image created to be centered on the square in the display
+                        surface.blit(img, piece.texture_rect) # Telling pygame to blit my image into the texture rect which is already centered
