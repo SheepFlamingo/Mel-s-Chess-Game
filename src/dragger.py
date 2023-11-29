@@ -18,8 +18,8 @@ class Dragger:
         # Path to the img
         texture = self.piece.texture
         
-        # Loading img
-        img = pygame.image.load(texture)
+        # Loading img, used .convert_alpha function for efficiency and transparency
+        img = pygame.image.load(texture).convert_alpha()
         
         # Rect, centering the piece onto the mouse
         img_center = (self.mouseX, self.mouseY)

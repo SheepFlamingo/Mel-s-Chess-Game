@@ -36,7 +36,12 @@ class Game:
                     # all pieces except dragger pieces
                     if piece is not self.dragger.piece:
                         piece.set_texture(size=80)
-                        img = pygame.image.load(piece.texture) # Converts texture into an actual image to be displayed
+                        img = pygame.image.load(piece.texture).convert_alpha() # Converts texture into an actual image to be displayed, used .convert_alpha function for efficiency and transparency
                         img_center = col * squareSize + squareSize // 2, row * squareSize + squareSize // 2 # Creating an image center to center the piece on the square
                         piece.texture_rect = img.get_rect(center=img_center) # Telling texture_rect the image created to be centered on the square in the display
                         surface.blit(img, piece.texture_rect) # Telling pygame to blit my image into the texture rect which is already centered
+        """
+        Draw the dragging piece last
+        if self.dragger.dragging:
+            self.dragger.update_blit(surface)
+        """

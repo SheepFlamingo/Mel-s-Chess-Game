@@ -1,5 +1,6 @@
 import pygame
 import sys
+from pygame.locals import *
 
 from const import *
 from game import Game
@@ -9,7 +10,13 @@ class Main:
     def __init__(self):
         """Initialize pygame, the window for display, and the caption for the window."""
         pygame.init()
-        self.screen = pygame.display.set_mode( (width, height) ) # Creates a new window to display the game
+        
+        # Set up flags for fullscreen and double buffering
+        flags = FULLSCREEN | DOUBLEBUF
+        
+        # Adjust the display mode to match the screen dimensions and pixel depth
+        self.screen = pygame.display.set_mode( (width, height), flags, 16 ) # Creates a new window to display the game
+        
         pygame.display.set_caption('Chess')
         self.game = Game()
     
@@ -20,7 +27,7 @@ class Main:
         board = self.game.board
         dragger = self.game.dragger
         
-        while True:
+        while 1:
 
             game.show_background(screen)
             game.show_pieces(screen)
@@ -54,9 +61,8 @@ class Main:
                 
                 # Mouse motion
                 elif event.type == pygame.MOUSEMOTION:
+                    # Only want to capture mouse motion when dragging is True
                     if dragger.dragging:
-                        # Only want to capture mouse motion when dragging is True
-                        
                         # Update mouse position
                         dragger.update_mouse(event.pos)
                         
