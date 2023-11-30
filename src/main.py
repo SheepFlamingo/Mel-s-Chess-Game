@@ -12,10 +12,10 @@ class Main:
         pygame.init()
         
         # Set up flags for fullscreen and double buffering
-        flags = FULLSCREEN | DOUBLEBUF
+        # flags = FULLSCREEN | DOUBLEBUF
         
         # Adjust the display mode to match the screen dimensions and pixel depth
-        self.screen = pygame.display.set_mode( (width, height), flags, 16 ) # Creates a new window to display the game
+        self.screen = pygame.display.set_mode( (width, height)) # Creates a new window to display the game || , flags, 16 added for fs
         
         pygame.display.set_caption('Chess')
         self.game = Game()
@@ -28,8 +28,10 @@ class Main:
         dragger = self.game.dragger
         
         while 1:
-
+            
+            # Show Methods
             game.show_background(screen)
+            game.show_moves(screen)
             game.show_pieces(screen)
             
             if dragger.dragging:
@@ -55,8 +57,14 @@ class Main:
                     # Check if clicked position has a piece
                     if board.squares[clicked_row][clicked_col].has_piece():
                         piece = board.squares[clicked_row][clicked_col].piece
+                        board.calc_moves(piece, clicked_row, clicked_col)
                         dragger.save_inital(event.pos) # This is a save spot incase the player does an invalid move, the method will be implmmented later
                         dragger.drag_piece(piece)
+
+                        # show methods
+                        game.show_background(screen)
+                        game.show_moves(screen)
+                        game.show_pieces(screen)
                         
                 
                 # Mouse motion
@@ -66,8 +74,9 @@ class Main:
                         # Update mouse position
                         dragger.update_mouse(event.pos)
                         
-                        # Keeps background and pieces on screen
+                        # Keeps background and pieces on screen || Show methods
                         game.show_background(screen)
+                        game.show_moves(screen)
                         game.show_pieces(screen)
                         
                         # Update blit to piece being moved

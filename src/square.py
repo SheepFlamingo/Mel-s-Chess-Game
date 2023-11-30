@@ -20,3 +20,27 @@ class Square:
             False if this square doesn't have a piece
         """
         return self.piece != None
+    
+    def isempty(self):
+        # Checking if space is empty
+        return not self.has_piece()
+    
+    def has_team_piece(self, color):
+        # Checking is space is occupied with a team piece
+        return self.has_piece() and self.piece.color == color
+
+    def has_rival_piece(self, color):
+        # Checking if the space is occupied with a rival team piece
+        return self.has_piece() and self.piece.color != color
+
+    def isempty_or_rival(self, color):
+        # Checking if the space is empty or has a rival piece
+        return self.isempty() or self.has_rival_piece(color)
+
+    @staticmethod
+    def in_range(*args): # *args = lists of arguements
+        for arg in args:
+            if arg < 0 or arg > 7:
+                return False
+        
+        return True

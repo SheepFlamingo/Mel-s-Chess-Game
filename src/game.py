@@ -49,3 +49,16 @@ class Game:
         if self.dragger.dragging:
             self.dragger.update_blit(surface)
         """
+    
+    def show_moves(self, surface):
+        if self.dragger.dragging:
+            piece = self.dragger.piece # This is the piece to show the moves
+
+            # Loop all valid moves and blit them
+            for move in piece.moves:
+                # Color
+                color = '#C86464' if (move.final.row + move.final.col) % 2 == 0 else '#C84646'
+                # Rect
+                rect = (move.final.col * squareSize, move.final.row * squareSize, squareSize, squareSize)
+                # Blit
+                pygame.draw.rect(surface, color, rect)
