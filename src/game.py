@@ -15,6 +15,10 @@ class Game:
         Args:
             surface (path): passing self.screen created in the Main class
         """
+        # Fill the screen with a background color
+        # This clears the screen with a black background color before drawing the chessboard. This prevents the afterimage issue when dragging pieces.
+        surface.fill((0, 0, 0))
+        
         for row in range(rows):
             for col in range(cols):
                 if (row + col) % 2 == 0:

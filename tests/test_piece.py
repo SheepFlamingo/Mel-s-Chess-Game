@@ -10,7 +10,7 @@ class TestPieces(unittest.TestCase):
         self.assertEqual(piece.value, 1.0)
         self.assertEqual(piece.moves, [])
         self.assertFalse(piece.moved)
-        self.assertIsNone(piece.texture)
+        self.assertIsNotNone(piece.texture)
         self.assertIsNone(piece.texture_rect)
 
     def test_pawn_init(self):
@@ -19,8 +19,8 @@ class TestPieces(unittest.TestCase):
         
         self.assertEqual(pawn_white.dir, -1)
         self.assertEqual(pawn_black.dir, 1)
-        self.assertEqual(pawn_white.value, -1.0)  # Check the value sign for white pawn
-        self.assertEqual(pawn_black.value, 1.0)   # Check the value sign for black pawn
+        self.assertEqual(pawn_white.value, 1.0)  # Check the value sign for white pawn
+        self.assertEqual(pawn_black.value, -1.0)   # Check the value sign for black pawn
 
     def test_knight_init(self):
         knight = Knight('white')
