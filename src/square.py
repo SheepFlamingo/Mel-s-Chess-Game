@@ -1,5 +1,8 @@
 
 class Square:
+    
+    ALPHACOLS = {0: 'a', 1: 'b', 2: 'c', 3: 'd', 4: 'e', 5: 'f', 6: 'g', 7: 'h'}
+    
     def __init__(self, row, col, piece=None):
         """Initalizing a square with either a piece or leaving it as an empty square.
 
@@ -11,6 +14,11 @@ class Square:
         self.row = row
         self.col = col
         self.piece = piece
+        self.alphacol = self.ALPHACOLS[col]
+    
+    def __eq__(self, other):
+        #Dunder method to tell python when does a move equal to another move
+        return self.row == other.row and self.col == other.col
     
     def has_piece(self):
         """Checks if this square has a piece.
@@ -44,3 +52,8 @@ class Square:
                 return False
         
         return True
+    
+    @staticmethod
+    def get_alphacol(col):
+        ALPHACOLS = {0: 'a', 1: 'b', 2: 'c', 3: 'd', 4: 'e', 5: 'f', 6: 'g', 7: 'h'}
+        return ALPHACOLS[col]

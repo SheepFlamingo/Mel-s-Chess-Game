@@ -35,6 +35,9 @@ class Piece:
     def add_move(self, move):
         self.moves.append(move)
     
+    def clear_moves(self):
+        self.moves= []
+    
 class Pawn(Piece):
     def __init__(self, color):
         """Coordinates work differently in pygame, because while the x-axis behaves as expected the y-axis increases value going downard and decreases value going upward.
@@ -47,6 +50,7 @@ class Pawn(Piece):
             color (str): color of the pawn determines its direction.
         """
         self.dir = -1 if color == 'white' else 1
+        self.en_passant = False
         super().__init__('pawn', color, 1.0)
 
 class Knight(Piece):
@@ -77,5 +81,7 @@ class King(Piece):
     def __init__(self, color):
         """
         """
+        self.left_rook = None
+        self.right_rook = None
         super().__init__('king', color, 100_000.0) # The king is the most valuable piece in the game, this will tell the AI you cannot lose it or you will lose the game if this doesn't work we can change it to math.infinity, but the reason I chose a concrete number is to make it more efficicent.
 

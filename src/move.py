@@ -5,3 +5,13 @@ class Move:
         # initial and final are squares
         self.initial = initial
         self.final = final
+        
+    def __str__(self):
+        s = ''
+        s += f'({self.initial.col}, {self.initial.row})'
+        s += f' -> ({self.final.col}, {self.final.row})'
+        return s
+    
+    def __eq__(self, other):
+        #Dunder method to tell python when does a move equal to another move
+        return self.initial == other.initial and self.final == other.final
